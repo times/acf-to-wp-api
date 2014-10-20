@@ -31,7 +31,7 @@ class ACFtoWPAPI{
 	/**
 	 * Users
 	 */
-	function addACFDataUser($data, $user, $context) {
+	function addACFDataUser($data, $user, $context = null) {
 		$fieldData = get_fields($user);
 		$data['acf'] = $fieldData;
 		return $data;
