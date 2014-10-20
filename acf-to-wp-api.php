@@ -31,7 +31,7 @@ class ACFtoWPAPI{
 	/**
 	 * Users
 	 */
-	function addACFDataUser($data, $user, $context = null) {
+	function addACFDataUser($data, $user, $context) {
 		$fieldData = get_fields($user);
 		$data['acf'] = $fieldData;
 		return $data;
@@ -40,7 +40,7 @@ class ACFtoWPAPI{
 	/**
 	 * Taxonomy Terms
 	 */
-	function addACFDataTerm($data, $term, $context) {
+	function addACFDataTerm($data, $term, $context = null) {
 		$fieldData = get_fields($term);
 		$data['acf'] = $fieldData;
 		return $data;
