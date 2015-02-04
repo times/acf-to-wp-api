@@ -4,7 +4,7 @@
  * Description: Puts all ACF fields from posts, pages, custom post types, attachments and taxonomy terms, into the WP-API output under the 'acf' key
  * Author: Chris Hutchinson
  * Author URI: http://www.chrishutchinson.me
- * Version: 1.0.0
+ * Version: 1.1.0
  * Plugin URI: https://timesdev.tools
  */
 
@@ -18,9 +18,9 @@ class ACFtoWPAPI{
 		$this->plugin = new StdClass;
 		$this->plugin->title = 'ACF to WP API';
 		$this->plugin->name = 'acf-to-wp-api';
-		$this->plugin->version = '0.0.1';
         $this->plugin->folder = WP_PLUGIN_DIR . '/' . $this->plugin->name;
         $this->plugin->url = WP_PLUGIN_URL . '/' . str_replace(basename( __FILE__), "", plugin_basename(__FILE__));
+		$this->plugin->version = '1.1.0';
 
 		// Filters
 		add_filter('json_prepare_post', array(&$this, 'addACFDataPost'), 10, 3); // Posts
