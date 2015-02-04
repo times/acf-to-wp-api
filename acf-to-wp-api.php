@@ -26,6 +26,9 @@ class ACFtoWPAPI{
 		add_filter('json_prepare_post', array(&$this, 'addACFDataPost'), 10, 3); // Posts
 		add_filter('json_prepare_term', array(&$this, 'addACFDataTerm'), 10, 3); // Taxonomy Terms
 		add_filter('json_prepare_user', array(&$this, 'addACFDataUser'), 10, 3); // Users
+
+		// Endpoints
+		add_filter('json_endpoints', array(&$this, 'registerRoutes'), 10, 3);
 	}
 
 	/**
@@ -53,6 +56,24 @@ class ACFtoWPAPI{
 		$fieldData = get_fields($post['ID']);
 		$data['acf'] = $fieldData;
 		return $data;
+	}
+
+	/**
+	 * Options endpoint
+	 */
+	function getACFOptions() {
+		return get_fields('option');
+	}
+
+	/**
+	 * Custom routes
+	 */
+	function registerRoutes( $routes ) {
+		$routes['/option'] = array(
+			array(array(&$this, 'getACFOptions'), WP_JSON_Server::READABLE)
+		);
+
+		return $routes;
 	}
 
 }
