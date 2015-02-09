@@ -1,9 +1,9 @@
 # ACF to WP-API
-Contributors: chrishutchinson
+Contributors: chrishutchinson, kokarn
 Tags: acf, api, wp-api
 Requires at least: 3.0.1
 Tested up to: 4.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: MIT
 License URI: http://opensource.org/licenses/MIT
 
@@ -21,6 +21,9 @@ Puts all ACF fields from posts, pages, custom post types, attachments and taxono
 ## Frequently Asked Questions
 
 ## Changelog
+
+### 1.1.0
+* Added support for ACF Options Page
 
 ### 1.0.0
 
