@@ -26,6 +26,7 @@ class ACFtoWPAPI{
 		add_filter('json_prepare_post', array(&$this, 'addACFDataPost'), 10, 3); // Posts
 		add_filter('json_prepare_term', array(&$this, 'addACFDataTerm'), 10, 3); // Taxonomy Terms
 		add_filter('json_prepare_user', array(&$this, 'addACFDataUser'), 10, 3); // Users
+		add_filter('json_prepare_comment', array(&$this, 'addACFDataComment'), 10, 3); // Comments
 
 		// Endpoints
 		add_filter('json_endpoints', array(&$this, 'registerRoutes'), 10, 3);
@@ -54,6 +55,15 @@ class ACFtoWPAPI{
 	 */
 	function addACFDataPost($data, $post, $context) {
 		$fieldData = get_fields($post['ID']);
+		$data['acf'] = $fieldData;
+		return $data;
+	}
+
+	/**
+	 * Comments
+	 */
+	function addACFDataComment($data, $comment, $context) {
+		$fieldData = get_fields("comment_{$comment->comment_ID}");
 		$data['acf'] = $fieldData;
 		return $data;
 	}
