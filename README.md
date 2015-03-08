@@ -1,10 +1,11 @@
 # ACF to WP-API
-Contributors: chrishutchinson, kokarn, ramvi
-Tags: acf, api, wp-api
-Requires at least: 3.0.1
-Tested up to: 4.1.1
-Stable tag: 1.2.0
-License: MIT
+
+Contributors: chrishutchinson, kokarn, ramvi   
+Tags: acf, api, wp-api   
+Requires at least: 3.0.1   
+Tested up to: 4.1.1   
+Stable tag: 1.2.0   
+License: MIT   
 License URI: http://opensource.org/licenses/MIT
 
 Puts all ACF fields from posts, pages, custom post types, comments, attachments and taxonomy terms, into the WP-API output under the 'acf' key. Creates a new `/option` endpoint returning options (requires ACF Options Page plugin).
