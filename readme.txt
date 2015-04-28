@@ -2,8 +2,8 @@
 Contributors: chrishutchinson, kokarn, ramvi
 Tags: acf, api, wp-api
 Requires at least: 3.0.1
-Tested up to: 4.1.1
-Stable tag: 1.2.0
+Tested up to: 4.2.1
+Stable tag: 1.2.1
 License: MIT
 License URI: http://opensource.org/licenses/MIT
 
@@ -23,6 +23,10 @@ Puts all ACF fields from posts, pages, custom post types, comments, attachments 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.1 =
+
+* Tested with WordPress 4.2.1
 
 = 1.2.0 =
 
