@@ -1,5 +1,7 @@
 # ACF to WP-API
 
+[![Join the chat at https://gitter.im/times/acf-to-wp-api](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/times/acf-to-wp-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Contributors: chrishutchinson, kokarn, ramvi   
 Tags: acf, api, wp-api   
 Requires at least: 3.0.1   
