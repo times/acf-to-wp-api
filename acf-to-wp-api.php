@@ -76,13 +76,26 @@ class ACFtoWPAPI{
 	}
 
 	/**
+	 * Option/<name> endpoint
+	 * @param $name
+	 * @return mixed
+	 */
+	function getACFOption($name) {
+		return get_field($name, 'option');
+	}
+
+	/**
 	 * Custom routes
 	 */
 	function registerRoutes( $routes ) {
-		$routes['/option'] = array(
+		// all the options
+		$routes['/options'] = array(
 			array(array(&$this, 'getACFOptions'), WP_JSON_Server::READABLE)
 		);
-
+		// a specific option
+		$routes['/options/(?P<name>[\w-]+)'] = array(
+			array( array( $this, 'getACFOption' ), WP_JSON_Server::READABLE ),
+		);
 		return $routes;
 	}
 
