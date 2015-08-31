@@ -4,9 +4,9 @@
 
 Contributors: chrishutchinson, kokarn, ramvi   
 Tags: acf, api, wp-api   
-Requires at least: 3.0.1   
-Tested up to: 4.2.1  
-Stable tag: 1.2.1
+Requires at least: 3.9.0
+Tested up to: 4.3.0 
+Stable tag: 1.3.0
 License: MIT   
 License URI: http://opensource.org/licenses/MIT
 
@@ -23,7 +23,28 @@ Puts all ACF fields from posts, pages, custom post types, comments, attachments 
 
 ## Frequently Asked Questions
 
+#### How can I log and issue or contribute code?
+See the `CONTRIBUTING.md` file.
+
+#### How can I filter posts on a custom field?
+See issue #13 for example code to do this.
+
+## Options Endpoints
+
+### `/wp-json/wp/v2/acf/options`
+Request a list of all options configured in ACF
+
+### `/wp-json/wp/v2/acf/options/{option-name}`
+Request a specific option, by passing in the option name
+
 ## Changelog
+
+### 1.3.0
+
+* Add support for v2 of WP-API
+* Restructure of much of the code, adding documentation throughout
+* Add an additional endpoint for requesting single option values
+* Tested with WordPress 4.3.0
 
 ### 1.2.1
 
