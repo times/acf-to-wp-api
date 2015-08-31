@@ -5,7 +5,7 @@
  * Author: Chris Hutchinson
  * Author URI: http://www.chrishutchinson.me
  * Version: 1.3.0
- * Plugin URI: https://wordpress.org/p
+ * Plugin URI: https://wordpress.org/plugins/acf-to-wp-api/
  */
 
 class ACFtoWPAPI {
