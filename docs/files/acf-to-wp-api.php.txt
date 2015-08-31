@@ -5,7 +5,7 @@
  * Author: Chris Hutchinson
  * Author URI: http://www.chrishutchinson.me
  * Version: 1.3.0
- * Plugin URI: https://wordpress.org/p
+ * Plugin URI: https://wordpress.org/plugins/acf-to-wp-api/
  */
 
 class ACFtoWPAPI {
@@ -19,13 +19,6 @@ class ACFtoWPAPI {
 	 * @var string 	$apiVersion 		Stores the version number of the REST API
 	 */
 	protected $apiVersion;
-
-	/**
-	 * @var array 	$versionTwoNumbers	An array of version two numbers, used for deciding which aspects of this plugin to run
-	 */
-	protected $versionTwoNumbers = [
-		'2.0-beta4'
-	];
 
 	/**
 	 * Constructor
@@ -130,11 +123,17 @@ class ACFtoWPAPI {
 			return false;
 		}
 
-		if( in_array( $version, $this->versionTwoNumbers ) ) {
+		$baseNumber = substr( $version, 0, 1 );
+
+		if( $baseNumber === '1' ) {
+			return 1;
+		}
+
+		if( $baseNumber === '2' ) {
 			return 2;
 		}
 
-		return 1;
+		return false;
 	}
 
 	/**
@@ -177,7 +176,7 @@ class ACFtoWPAPI {
 	 * @since 1.1.0
 	 */
 	function addACFDataUser( $data, $user, $context ) {
-		$data['acf'] = $this->_getData( $user, 'user' );
+		$data['acf'] = $this->_getData( $user->ID, 'user' );
 		return $data;
 	}
 
@@ -471,18 +470,40 @@ class ACFtoWPAPI {
 	}
 
 	/**
+	 * Returns a single option based on the supplied name (WP API v1)
+	 *
+	 * @author github.com/asquel
+	 *
+	 * @param string 	$name 	The option name being requested
+	 *
+	 * @return mixed 	The data for the supplied option	
+	 *
+	 * @since 1.3.0
+	 */
+	function getACFOption($name) {
+		return get_field($name, 'option');
+	}
+
+	/**
 	 * Registers additional routes (WP API v1)
 	 *
 	 * @author github.com/kokarn
 	 *
-	 * @return array 	The options data
+	 * @return array 	The routes data
 	 *
 	 * @since 1.1.0
 	 *
 	 */
 	function registerRoutes( $routes ) {
 		$routes['/option'] = array(
-			array(array(&$this, 'getACFOptions'), WP_JSON_Server::READABLE)
+			array( array( $this, 'getACFOptions' ), WP_JSON_Server::READABLE )
+		);
+		$routes['/options'] = array(
+			array( array( $this, 'getACFOptions' ), WP_JSON_Server::READABLE )
+		);
+
+		$routes['/options/(?P<name>[\w-]+)'] = array(
+			array( array( $this, 'getACFOption' ), WP_JSON_Server::READABLE ),
 		);
 
 		return $routes;
