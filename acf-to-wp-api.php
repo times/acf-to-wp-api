@@ -21,13 +21,6 @@ class ACFtoWPAPI {
 	protected $apiVersion;
 
 	/**
-	 * @var array 	$versionTwoNumbers	An array of version two numbers, used for deciding which aspects of this plugin to run
-	 */
-	protected $versionTwoNumbers = [
-		'2.0-beta4'
-	];
-
-	/**
 	 * Constructor
 	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
@@ -130,11 +123,17 @@ class ACFtoWPAPI {
 			return false;
 		}
 
-		if( in_array( $version, $this->versionTwoNumbers ) ) {
+		$baseNumber = substr( $version, 0, 1 );
+
+		if( $baseNumber === '1' ) {
+			return 1;
+		}
+
+		if( $baseNumber === '2' ) {
 			return 2;
 		}
 
-		return 1;
+		return false;
 	}
 
 	/**
@@ -177,7 +176,7 @@ class ACFtoWPAPI {
 	 * @since 1.1.0
 	 */
 	function addACFDataUser( $data, $user, $context ) {
-		$data['acf'] = $this->_getData( $user, 'user' );
+		$data['acf'] = $this->_getData( $user->ID, 'user' );
 		return $data;
 	}
 
