@@ -470,18 +470,40 @@ class ACFtoWPAPI {
 	}
 
 	/**
+	 * Returns a single option based on the supplied name (WP API v1)
+	 *
+	 * @author github.com/asquel
+	 *
+	 * @param string 	$name 	The option name being requested
+	 *
+	 * @return mixed 	The data for the supplied option	
+	 *
+	 * @since 1.3.0
+	 */
+	function getACFOption($name) {
+		return get_field($name, 'option');
+	}
+
+	/**
 	 * Registers additional routes (WP API v1)
 	 *
 	 * @author github.com/kokarn
 	 *
-	 * @return array 	The options data
+	 * @return array 	The routes data
 	 *
 	 * @since 1.1.0
 	 *
 	 */
 	function registerRoutes( $routes ) {
 		$routes['/option'] = array(
-			array(array(&$this, 'getACFOptions'), WP_JSON_Server::READABLE)
+			array( array( $this, 'getACFOptions' ), WP_JSON_Server::READABLE )
+		);
+		$routes['/options'] = array(
+			array( array( $this, 'getACFOptions' ), WP_JSON_Server::READABLE )
+		);
+
+		$routes['/options/(?P<name>[\w-]+)'] = array(
+			array( array( $this, 'getACFOption' ), WP_JSON_Server::READABLE ),
 		);
 
 		return $routes;
