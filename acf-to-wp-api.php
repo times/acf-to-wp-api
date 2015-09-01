@@ -99,7 +99,8 @@ class ACFtoWPAPI {
 	 */
 	private function _versionTwoSetup() {
 		// Actions
-		add_action( 'rest_api_init', array( $this, 'addACFDataPostV2' ) ); // Posts
+		add_action( 'rest_api_init', array( $this, 'addACFDataPostV2' ) ); // Posts and post types		
+		
 		add_action( 'rest_api_init', array( $this, 'addACFDataTermV2' ) ); // Taxonomy Terms
 		add_action( 'rest_api_init', array( $this, 'addACFDataUserV2' ) ); // Users
 		add_action( 'rest_api_init', array( $this, 'addACFDataCommentV2' ) ); // Comments
@@ -216,14 +217,19 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFDataPostV2() {
-		register_api_field( 'post',
+		$post_types = get_post_types( '', 'names' ); 
+		foreach($post_types as $post_type){
+				register_api_field( $post_type,
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
 	            'update_callback' => null,
 	            'schema'          => null,
 	        )
-	    );
+				);
+		}
+		
+		
 	}
 	
 	/**
