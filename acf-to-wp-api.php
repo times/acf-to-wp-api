@@ -400,19 +400,19 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFOptionRouteV2() {
-		register_rest_route( 'wp/v2/acf', '/options', [
-			'methods' => [
+		register_rest_route( 'wp/v2/acf', '/options', array(
+			'methods' => array(
 				'GET'
-			],
+			),
 			'callback' => array( $this, 'addACFOptionRouteV2cb' )
-		] );
+		) );
 
-		register_rest_route( 'wp/v2/acf', '/options/(?P<option>.+)', [
-			'methods' => [
+		register_rest_route( 'wp/v2/acf', '/options/(?P<option>.+)', array(
+			'methods' => array(
 				'GET'
-			],
+			),
 			'callback' => array( $this, 'addACFOptionRouteV2cb' )
-		] );
+		) );
 	}
 
 	/**
