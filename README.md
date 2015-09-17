@@ -6,7 +6,7 @@ Contributors: chrishutchinson, kokarn, ramvi
 Tags: acf, api, wp-api   
 Requires at least: 3.9.0
 Tested up to: 4.3.0 
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: MIT   
 License URI: http://opensource.org/licenses/MIT
 
@@ -38,6 +38,10 @@ Request a list of all options configured in ACF
 Request a specific option, by passing in the option name
 
 ## Changelog
+
+### 1.3.2
+
+* Adds support for custom post types when using v2 of the REST API
 
 ### 1.3.1
 

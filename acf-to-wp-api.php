@@ -4,7 +4,7 @@
  * Description: Puts all ACF fields from posts, pages, custom post types, attachments and taxonomy terms, into the WP-API output under the 'acf' key
  * Author: Chris Hutchinson
  * Author URI: http://www.chrishutchinson.me
- * Version: 1.3.1
+ * Version: 1.3.2
  * Plugin URI: https://wordpress.org/plugins/acf-to-wp-api/
  */
 
@@ -35,7 +35,7 @@ class ACFtoWPAPI {
 		$this->plugin->name = 'acf-to-wp-api';
         $this->plugin->folder = WP_PLUGIN_DIR . '/' . $this->plugin->name;
         $this->plugin->url = WP_PLUGIN_URL . '/' . str_replace(basename( __FILE__), "", plugin_basename(__FILE__));
-		$this->plugin->version = '1.3.1';
+		$this->plugin->version = '1.3.2';
 
 		$this->apiVersion = get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
 
@@ -49,7 +49,6 @@ class ACFtoWPAPI {
 			$this->_versionTwoSetup();	
 		}
 	}
-
 	/**
 	 * Die and dump
 	 *
@@ -213,9 +212,11 @@ class ACFtoWPAPI {
 	 *
 	 * @return void
 	 *
+	 * @since 1.3.2 	Adds support for pages and public custom post types
 	 * @since 1.3.0
 	 */
 	function addACFDataPostV2() {
+		// Posts
 		register_api_field( 'post',
 	        'acf',
 	        array(
@@ -224,6 +225,32 @@ class ACFtoWPAPI {
 	            'schema'          => null,
 	        )
 	    );
+
+		// Pages
+		register_api_field( 'page',
+	        'acf',
+	        array(
+	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
+	            'update_callback' => null,
+	            'schema'          => null,
+	        )
+	    );
+
+		// Public custom post types
+		$types = get_post_types(array(
+			'public' => true,
+			'_builtin' => false
+		));
+		foreach($types as $key => $type) {
+			register_api_field( $type,
+		        'acf',
+		        array(
+		            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
+		            'update_callback' => null,
+		            'schema'          => null,
+		        )
+		    );
+		}
 	}
 	
 	/**

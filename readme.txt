@@ -32,6 +32,10 @@ See GitHub issue #13 (http://github.com/times/acf-to-wp-api/issues/13) for examp
 
 == Changelog ==
 
+= 1.3.2 =
+
+* Adds support for custom post types when using v2 of the REST API
+
 = 1.3.1 =
 
 * Fix to support PHP < 5.4
