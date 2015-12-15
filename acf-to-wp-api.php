@@ -238,7 +238,7 @@ class ACFtoWPAPI {
 
 		// Public custom post types
 		$types = get_post_types(array(
-			'public' => true,
+			'publicly_queryable' => true,
 			'_builtin' => false
 		));
 		foreach($types as $key => $type) {
