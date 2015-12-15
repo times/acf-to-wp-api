@@ -37,7 +37,7 @@ class ACFtoWPAPI {
         $this->plugin->url = WP_PLUGIN_URL . '/' . str_replace(basename( __FILE__), "", plugin_basename(__FILE__));
 		$this->plugin->version = '1.3.2';
 
-		$this->apiVersion = get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
+		$this->apiVersion = (REST_API_VERSION) ?: get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
 
 		// Version One
 		if($this->_isAPIVersionOne()) {
