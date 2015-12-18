@@ -117,7 +117,7 @@ class ACFtoWPAPI {
 	private function _getAPIVersion() {
 		$version = 2;
 
-		if ( defined( REST_API_VERSION ) ) {
+		if ( defined('REST_API_VERSION') ) {
 			$version = REST_API_VERSION;
 		} else {
 			$version = get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
