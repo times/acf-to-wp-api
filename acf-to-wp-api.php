@@ -289,6 +289,25 @@ class ACFtoWPAPI {
 	            'schema'          => null,
 	        )
 	    );
+
+	    // Public taxonomies
+		$taxonomies = get_taxonomies(array(
+			'public'   => true,
+			'_builtin' => false
+
+		));
+
+		foreach($taxonomies as $key => $taxonomy) {
+
+			register_api_field( $taxonomy,
+				'acf',
+				array(
+					'get_callback'    => array( $this, 'addACFDataTermV2cb' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
+		}
 	}
 
 	/**
