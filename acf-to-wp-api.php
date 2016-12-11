@@ -218,7 +218,7 @@ class ACFtoWPAPI {
 	 */
 	function addACFDataPostV2() {
 		// Posts
-		register_api_field( 'post',
+		register_rest_field( 'post',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
@@ -228,7 +228,7 @@ class ACFtoWPAPI {
 	    );
 
 		// Pages
-		register_api_field( 'page',
+		register_rest_field( 'page',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
@@ -243,7 +243,7 @@ class ACFtoWPAPI {
 			'_builtin' => false
 		));
 		foreach($types as $key => $type) {
-			register_api_field( $type,
+			register_rest_field( $type,
 		        'acf',
 		        array(
 		            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
@@ -281,7 +281,7 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFDataTermV2() {
-		register_api_field( 'term',
+		register_rest_field( 'term',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataTermV2cb' ),
@@ -318,7 +318,7 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFDataUserV2() {
-		register_api_field( 'user',
+		register_rest_field( 'user',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataUserV2cb' ),
@@ -355,7 +355,7 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFDataCommentV2() {
-		register_api_field( 'comment',
+		register_rest_field( 'comment',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataCommentV2cb' ),
