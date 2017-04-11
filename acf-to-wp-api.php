@@ -38,7 +38,7 @@ class ACFtoWPAPI {
         $this->plugin->url = WP_PLUGIN_URL . '/' . str_replace(basename( __FILE__), "", plugin_basename(__FILE__));
 		$this->plugin->version = '1.3.3';
 
-		$this->apiVersion = (REST_API_VERSION) ?: get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
+		$this->apiVersion = $this->_getAPIVersion();
 
 		// Version One
 		if($this->_isAPIVersionOne()) {
@@ -108,6 +108,26 @@ class ACFtoWPAPI {
 	}
 
 	/**
+	 * Returns the WP REST API version, assumes version 2
+	 * if can't find any other version
+	 * 
+	 * @return string The version number, set by WP REST API
+	 * 
+	 * @since 1.3.2
+	 */
+	private function _getAPIVersion() {
+		$version = 2;
+
+		if ( defined('REST_API_VERSION') ) {
+			$version = REST_API_VERSION;
+		} else {
+			$version = get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
+		}
+		
+		return $version;
+	}
+
+	/**
 	 * Gets the version number of the WP REST API
 	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
@@ -123,14 +143,10 @@ class ACFtoWPAPI {
 			return false;
 		}
 
-		$baseNumber = substr( $version, 0, 1 );
+		$baseNumber = (int) substr( $version, 0, 1 );
 
-		if( $baseNumber === '1' ) {
-			return 1;
-		}
-
-		if( $baseNumber === '2' ) {
-			return 2;
+		if( $baseNumber > 0 ) {
+			return $baseNumber;
 		}
 
 		return false;
