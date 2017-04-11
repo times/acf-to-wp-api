@@ -100,6 +100,7 @@ class ACFtoWPAPI {
 	private function _versionTwoSetup() {
 		// Actions
 		add_action( 'rest_api_init', array( $this, 'addACFDataPostV2' ) ); // Posts
+		add_action( 'rest_api_init', array( $this, 'addACFDataPageV2' ) ); // Pages
 		add_action( 'rest_api_init', array( $this, 'addACFDataTermV2' ) ); // Taxonomy Terms
 		add_action( 'rest_api_init', array( $this, 'addACFDataUserV2' ) ); // Users
 		add_action( 'rest_api_init', array( $this, 'addACFDataCommentV2' ) ); // Comments
@@ -252,6 +253,24 @@ class ACFtoWPAPI {
 		        )
 		    );
 		}
+	}
+
+	/**
+	 * Registers the `acf` field against pages
+	 *
+	 * @return void
+	 *
+	 * @since 1.3.0
+	 */
+	function addACFDataPageV2() {
+		register_api_field( 'page',
+			'acf',
+			array(
+				'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
 	}
 	
 	/**
