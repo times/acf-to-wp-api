@@ -48,7 +48,7 @@ class ACFtoWPAPI {
 
 		// Version Two
 		if($this->_isAPIVersionTwo()) {
-			$this->_versionTwoSetup();	
+			$this->_versionTwoSetup();
 		}
 	}
 	/**
@@ -57,7 +57,7 @@ class ACFtoWPAPI {
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
 	 *
 	 * @param mixed 	$data 	The data to be dumped to the screen
-	 * 
+	 *
 	 * @return void
 	 *
 	 * @since 1.3.0
@@ -161,7 +161,7 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	private function _isAPIVersionOne() {
-		if($this->_getAPIBaseVersion() === 1) { 
+		if($this->_getAPIBaseVersion() === 1) {
 			return true;
 		}
 
@@ -176,7 +176,7 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	private function _isAPIVersionTwo() {
-		if($this->_getAPIBaseVersion() === 2) { 
+		if($this->_getAPIBaseVersion() === 2) {
 			return true;
 		}
 
@@ -270,16 +270,16 @@ class ACFtoWPAPI {
 		    );
 		}
 	}
-	
+
 	/**
 	 * Returns the ACF data to be added to the JSON response posts
-	 * 
+	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
 	 *
 	 * @param array 	$object 		The object to get data for
 	 * @param string 	$fieldName 		The name of the field being completed
 	 * @param object 	$request 		The WP_REST_REQUEST object
-	 * 
+	 *
 	 * @return array 	The data for this object type
 	 *
 	 * @see ACFtoWPAPI::addACFDataPostV2()
@@ -310,13 +310,13 @@ class ACFtoWPAPI {
 
 	/**
 	 * Returns the ACF data to be added to the JSON response for taxonomy terms
-	 * 
+	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
 	 *
 	 * @param array 	$object 		The object to get data for
 	 * @param string 	$fieldName 		The name of the field being completed
 	 * @param object 	$request 		The WP_REST_REQUEST object
-	 * 
+	 *
 	 * @return array 	The data for this object type
 	 *
 	 * @see ACFtoWPAPI::addACFDataTermV2()
@@ -347,13 +347,13 @@ class ACFtoWPAPI {
 
 	/**
 	 * Returns the ACF data to be added to the JSON response for users
-	 * 
+	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
 	 *
 	 * @param array 	$object 		The object to get data for
 	 * @param string 	$fieldName 		The name of the field being completed
 	 * @param object 	$request 		The WP_REST_REQUEST object
-	 * 
+	 *
 	 * @return array 	The data for this object type
 	 *
 	 * @see ACFtoWPAPI::addACFDataUserV2()
@@ -384,13 +384,13 @@ class ACFtoWPAPI {
 
 	/**
 	 * Returns the ACF data to be added to the JSON response for comments
-	 * 
+	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
 	 *
 	 * @param array 	$object 		The object to get data for
 	 * @param string 	$fieldName 		The name of the field being completed
 	 * @param object 	$request 		The WP_REST_REQUEST object
-	 * 
+	 *
 	 * @return array 	The data for this object type
 	 *
 	 * @see ACFtoWPAPI::addACFDataCommentV2()
@@ -405,13 +405,13 @@ class ACFtoWPAPI {
 	 * Returns an array of Advanced Custom Fields data for the given record
 	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
-	 * 
+	 *
 	 * @param int 		$id 		The ID of the object to get
 	 * @param string 	$type 		The type of the object to get
 	 * @param array 	$object 	The full object being requested, only required for specific $types
 	 *
 	 * @return array 	The Advanced Custom Fields data for the supplied record
-	 * 
+	 *
 	 * @since 1.3.0
 	 */
 	private function _getData($id, $type = 'post', $object = array()) {
@@ -463,12 +463,12 @@ class ACFtoWPAPI {
 
 	/**
 	 * The callback for the `wp/v2/acf/options` endpoint
-	 * 
+	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
 	 *
 	 * @param WP_REST_Request 	$request 	The WP_REST_Request object
 	 *
-	 * @return array|string 	The single requested option, or all options 
+	 * @return array|string 	The single requested option, or all options
 	 *
 	 * @see ACFtoWPAPI::addACFOptionRouteV2()
 	 *
@@ -522,7 +522,7 @@ class ACFtoWPAPI {
 	 *
 	 * @param string 	$name 	The option name being requested
 	 *
-	 * @return mixed 	The data for the supplied option	
+	 * @return mixed 	The data for the supplied option
 	 *
 	 * @since 1.3.0
 	 */
