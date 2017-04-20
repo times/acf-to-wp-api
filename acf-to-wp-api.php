@@ -234,43 +234,36 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFDataPostV2() {
-		// Posts
-		register_rest_field( 'post',
-	        'acf',
-	        array(
-	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
-	            'update_callback' => null,
-	            'schema'          => null,
-	        )
-	    );
+		// Built in post types
+		$types = [
+			'post',
+			'post-revision',
+			'page',
+			'page-revision'
+		];
 
-		// Pages
-		register_rest_field( 'page',
-	        'acf',
-	        array(
-	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
-	            'update_callback' => null,
-	            'schema'          => null,
-	        )
-	    );
-
-		// Public custom post types
-		$types = get_post_types(array(
+		// Custom post types
+		$custom_types = get_post_types(array(
 			'public' => true,
 			'_builtin' => false
 		));
-		foreach($types as $key => $type) {
+		foreach($custom_types as $type) {
+			$types[] = $type;
+			$types[] = $type . '-revision';
+		}
+
+		foreach($types as $type) {
 			register_rest_field( $type,
-		        'acf',
-		        array(
-		            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
-		            'update_callback' => null,
-		            'schema'          => null,
-		        )
-		    );
+				'acf',
+				array(
+						'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
+						'update_callback' => null,
+						'schema'          => null,
+				)
+			);
 		}
 	}
-	
+
 	/**
 	 * Returns the ACF data to be added to the JSON response posts
 	 * 
