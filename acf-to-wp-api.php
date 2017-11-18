@@ -292,13 +292,13 @@ class ACFtoWPAPI {
 
 	/**
 	 * Registers the `acf` field against taxonomy terms
-	 *
+	 * get all registred taxonomies with get_taxonomies()
 	 * @return void
 	 *
 	 * @since 1.3.0
 	 */
 	function addACFDataTermV2() {
-		register_rest_field( 'term',
+		register_api_field( get_taxonomies(),
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataTermV2cb' ),
