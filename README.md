@@ -5,8 +5,8 @@
 Contributors: chrishutchinson, kokarn, ramvi   
 Tags: acf, api, wp-api   
 Requires at least: 3.9.0
-Tested up to: 4.4.1
-Stable tag: 1.3.3
+Tested up to: 4.7.3
+Stable tag: 1.4.0
 License: MIT   
 License URI: http://opensource.org/licenses/MIT
 
@@ -38,6 +38,10 @@ Request a list of all options configured in ACF
 Request a specific option, by passing in the option name
 
 ## Changelog
+
+### 1.4.0
+
+* Compatibility improvements for WordPress 4.7
 
 ### 1.3.3
 

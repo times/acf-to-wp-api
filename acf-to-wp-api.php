@@ -4,7 +4,7 @@
  * Description: Puts all ACF fields from posts, pages, custom post types, attachments and taxonomy terms, into the WP-API output under the 'acf' key
  * Author: Chris Hutchinson
  * Author URI: http://www.chrishutchinson.me
- * Version: 1.3.3
+ * Version: 1.4.0
  * Plugin URI: https://wordpress.org/plugins/acf-to-wp-api/
  */
 
@@ -25,6 +25,7 @@ class ACFtoWPAPI {
 	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
 	 *
+	 * @since 1.4.0 	Improved API version checking
 	 * @since 1.3.3 	Compatibility fix for V2.0Beta9
 	 * @since 1.3.0 	Updated to support version 2 of the WP-API
 	 * @since 1.0.0
@@ -34,11 +35,11 @@ class ACFtoWPAPI {
 		$this->plugin = new StdClass;
 		$this->plugin->title = 'ACF to WP API';
 		$this->plugin->name = 'acf-to-wp-api';
-        $this->plugin->folder = WP_PLUGIN_DIR . '/' . $this->plugin->name;
-        $this->plugin->url = WP_PLUGIN_URL . '/' . str_replace(basename( __FILE__), "", plugin_basename(__FILE__));
-		$this->plugin->version = '1.3.3';
+    $this->plugin->folder = WP_PLUGIN_DIR . '/' . $this->plugin->name;
+    $this->plugin->url = WP_PLUGIN_URL . '/' . str_replace(basename( __FILE__), "", plugin_basename(__FILE__));
+		$this->plugin->version = '1.4.0';
 
-		$this->apiVersion = (REST_API_VERSION) ?: get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
+		$this->apiVersion = $this->_getAPIVersion();
 
 		// Version One
 		if($this->_isAPIVersionOne()) {
@@ -108,6 +109,26 @@ class ACFtoWPAPI {
 	}
 
 	/**
+	 * Returns the WP REST API version, assumes version 2
+	 * if can't find any other version
+	 * 
+	 * @return string The version number, set by WP REST API
+	 * 
+	 * @since 1.3.2
+	 */
+	private function _getAPIVersion() {
+		$version = 2;
+
+		if ( defined('REST_API_VERSION') ) {
+			$version = REST_API_VERSION;
+		} else {
+			$version = get_option( 'rest_api_plugin_version', get_option( 'json_api_plugin_version', null ) );
+		}
+		
+		return $version;
+	}
+
+	/**
 	 * Gets the version number of the WP REST API
 	 *
 	 * @author Chris Hutchinson <chris_hutchinson@me.com>
@@ -123,14 +144,10 @@ class ACFtoWPAPI {
 			return false;
 		}
 
-		$baseNumber = substr( $version, 0, 1 );
+		$baseNumber = (int) substr( $version, 0, 1 );
 
-		if( $baseNumber === '1' ) {
-			return 1;
-		}
-
-		if( $baseNumber === '2' ) {
-			return 2;
+		if( $baseNumber > 0 ) {
+			return $baseNumber;
 		}
 
 		return false;
@@ -218,7 +235,7 @@ class ACFtoWPAPI {
 	 */
 	function addACFDataPostV2() {
 		// Posts
-		register_api_field( 'post',
+		register_rest_field( 'post',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
@@ -228,7 +245,7 @@ class ACFtoWPAPI {
 	    );
 
 		// Pages
-		register_api_field( 'page',
+		register_rest_field( 'page',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
@@ -243,7 +260,7 @@ class ACFtoWPAPI {
 			'_builtin' => false
 		));
 		foreach($types as $key => $type) {
-			register_api_field( $type,
+			register_rest_field( $type,
 		        'acf',
 		        array(
 		            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
@@ -318,7 +335,7 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFDataUserV2() {
-		register_api_field( 'user',
+		register_rest_field( 'user',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataUserV2cb' ),
@@ -355,7 +372,7 @@ class ACFtoWPAPI {
 	 * @since 1.3.0
 	 */
 	function addACFDataCommentV2() {
-		register_api_field( 'comment',
+		register_rest_field( 'comment',
 	        'acf',
 	        array(
 	            'get_callback'    => array( $this, 'addACFDataCommentV2cb' ),
