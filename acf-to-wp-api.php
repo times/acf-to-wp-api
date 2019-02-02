@@ -269,6 +269,16 @@ class ACFtoWPAPI {
 		        )
 		    );
 		}
+
+		// Attachments
+		register_rest_field( 'attachment',
+	        'acf',
+	        array(
+	            'get_callback'    => array( $this, 'addACFDataPostV2cb' ),
+	            'update_callback' => null,
+	            'schema'          => null,
+	        )
+	    );
 	}
 	
 	/**
